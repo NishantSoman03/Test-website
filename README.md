@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -12,7 +12,107 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="icon" type="image/png" href="./static/Tantronics Logo.png">
-  <link rel="stylesheet" href="./static/style.css">
+
+  <style>
+    :root{
+      --bg:#0f1115; --fg:#e7e9ee; --muted:#aeb4c0; --brand:#41d1b7; --card:#171a20; --stroke:#23262d;
+      --pill:#1f2330; --accent:#2a2f3d;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--fg);}
+
+    /* LAYOUT uses percentages / vw / vh */
+    section{padding:6vh 4vw}
+    .container{width:92vw; margin:0 auto}
+    .section-head{margin-bottom:3vh}
+    .section-head h2{font-size:clamp(1.25rem,2.2vw,2rem); margin:0 0 1vh 0}
+    .lead{color:var(--muted)}
+
+    /* HEADER */
+    header{position:sticky; top:0; z-index:10; background:rgba(15,17,21,.75); backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid var(--stroke)}
+    .nav{width:92vw; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:1.5vh 0}
+    .brand{display:flex; align-items:center; gap:1vw; text-decoration:none; color:var(--fg)}
+    .brand .header-logo{height:4.5vh; width:auto}
+    nav ul{list-style:none; display:flex; gap:2vw; margin:0; padding:0}
+    nav a{color:var(--fg); text-decoration:none; font-weight:500}
+    .nav-cta{padding:.8vh 1.6vw; border:1px solid var(--stroke); border-radius:999px}
+    .hamburger{display:none; background:none; color:var(--fg); border:0; font-size:1.25rem}
+
+    /* MOBILE MENU (percentage width) */
+    #mobileMenu{display:none; position:absolute; left:0; top:100%; width:100vw; background:var(--card); border-top:1px solid var(--stroke)}
+    #mobileMenu a{display:block; padding:2.5vh 4vw}
+
+    /* HERO */
+    .hero{min-height:70vh; display:grid; place-items:center; text-align:center; background:radial-gradient(60% 80% at 50% 0%, #182030 0%, transparent 70%)}
+    .hero-inner{width:80vw; max-width:100%; margin:0 auto}
+    .hero .eyebrow{display:inline-block; padding:.6vh 1vw; border:1px solid var(--stroke); border-radius:999px; color:var(--muted); margin-bottom:2vh}
+    .hero h1{font-size:clamp(1.75rem,4vw,3rem); margin:1vh 0 2vh}
+    .cta-row{display:flex; gap:2vw; justify-content:center; flex-wrap:wrap}
+
+    /* BUTTONS */
+    .btn{display:inline-flex; align-items:center; gap:.6vw; padding:1.2vh 1.6vw; border-radius:12px; border:1px solid var(--stroke); text-decoration:none; color:var(--fg)}
+    .btn-primary{background:linear-gradient(180deg, #49e7cb, #34b39c); color:#071b17; border:0}
+    .btn-ghost{background:transparent}
+
+    /* ABOUT */
+    .about-grid{display:grid; grid-template-columns:100%; gap:4vw}
+    @media (min-width: 900px){
+      .about-grid{grid-template-columns: 60% 38%; gap:2%}
+    }
+    .about-card{background:var(--card); border:1px solid var(--stroke); border-radius:16px; padding:3vh 3vw}
+    .kpis{display:grid; grid-template-columns: repeat(2, 48%); gap:4%; margin-top:2.5vh}
+    @media (min-width: 900px){.kpis{grid-template-columns: repeat(4, 23%); gap:3%}}
+    .kpi h3{margin:.2rem 0; color:var(--brand)}
+
+    /* PRODUCTS */
+    .product-grid{display:grid; grid-template-columns:100%; gap:4vw}
+    @media (min-width: 700px){
+      .product-grid{grid-template-columns: 48% 48%; gap:4%}
+    }
+    @media (min-width: 1100px){
+      .product-grid{grid-template-columns: 32% 32% 32%; gap:2%}
+    }
+    .card{background:var(--card); border:1px solid var(--stroke); border-radius:16px; overflow:hidden}
+    .card .p{padding:2.8vh 2.8vw}
+    .pill{display:inline-block; background:var(--pill); border:1px solid var(--stroke); padding:.6vh 1vw; border-radius:999px; margin-bottom:1.2vh; color:var(--muted)}
+    .features{display:flex; flex-wrap:wrap; gap:1vw; margin-top:1.8vh}
+    .features span{padding:.5vh 1vw; border:1px solid var(--stroke); border-radius:999px; color:var(--muted)}
+
+    /* CAROUSELS – percentage sizing */
+    .carousel{position:relative; width:100%; /* height is derived from width via padding (percentage) */}
+    .ratio-4x3{height:0; padding-top:75%} /* 4:3 via percentage of width */
+    .carousel img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:none}
+    .carousel img.active{display:block}
+    .carousel button{position:absolute; top:50%; transform:translateY(-50%); width:6vh; height:6vh; border-radius:50%; border:0; background:rgba(0,0,0,.35); color:#fff; cursor:pointer}
+    .carousel .prev{left:2%}
+    .carousel .next{right:2%}
+
+    /* CTA */
+    .panel{display:flex; gap:3vw; align-items:center; justify-content:space-between; background:linear-gradient(180deg,#151925,#0f121a); border:1px solid var(--stroke); border-radius:20px; padding:3vh 3vw}
+    .panel .lead{max-width:70%}
+
+    /* CONTACT */
+    .contact-grid{display:grid; grid-template-columns:100%; gap:4vw}
+    @media (min-width: 900px){
+      .contact-grid{grid-template-columns: 58% 40%; gap:2%}
+    }
+    form{display:grid; grid-template-columns:48% 48%; gap:4%; background:var(--card); border:1px solid var(--stroke); border-radius:16px; padding:3vh 3vw}
+    form .full{grid-column:1 / -1}
+    label{display:block; margin:0 0 .8vh}
+    input,select,textarea{width:100%; padding:1.2vh 1vw; background:#0e1016; border:1px solid var(--stroke); border-radius:12px; color:var(--fg)}
+    textarea{min-height:18vh; resize:vertical}
+    .form-note{color:var(--muted)}
+
+    /* FOOTER */
+    footer{border-top:1px solid var(--stroke)}
+    .foot{width:92vw; margin:0 auto; display:grid; grid-template-columns:100%; gap:4vw; padding:5vh 0}
+    @media (min-width: 900px){.foot{grid-template-columns: 48% 24% 24%; gap:2%}}
+    .sub{border-top:1px solid var(--stroke); padding:2vh 4vw; color:var(--muted); text-align:center}
+
+    /* UTIL */
+    img{max-width:100%; height:auto; display:block}
+  </style>
 </head>
 <body>
   <!-- Header -->
@@ -24,28 +124,35 @@
       </a>
       <nav aria-label="Primary">
         <button class="hamburger" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
-        <ul>
+        <ul class="desktop">
           <li><a href="#about">About</a></li>
           <li><a href="#products">Products</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a class="nav-cta" href="#enquiry">Get a Quote</a></li>
         </ul>
+        <div id="mobileMenu">
+          <a href="#about">About</a>
+          <a href="#products">Products</a>
+          <a href="#contact">Contact</a>
+          <a href="#enquiry">Get a Quote</a>
+        </div>
       </nav>
     </div>
-    
   </header>
+
   <!-- Hero -->
   <section class="hero" id="home" role="banner" aria-label="Hero">
     <div class="hero-inner">
       <span class="eyebrow">Electronics • Automation • Embedded Systems • Power Electronics • Medicare</span>
       <h1>Industrial Automation Solutions</h1>
-      <p>From water level controllers and float sensors to custom embedded hardware and IoT systems, we build reliable, cost‑effective products engineered for Indian conditions.</p>
+      <p class="lead">From water level controllers and float sensors to custom embedded hardware and IoT systems, we build reliable, cost‑effective products engineered for Indian conditions.</p>
       <div class="cta-row">
         <a href="#products" class="btn btn-primary"><i class="fa-solid fa-store"></i> Explore Products</a>
         <a href="#contact" class="btn btn-ghost"><i class="fa-solid fa-envelope"></i> Contact Us</a>
       </div>
     </div>
   </section>
+
   <!-- About -->
   <section class="about" id="about">
     <div class="container about-grid">
@@ -85,11 +192,12 @@
         </div>
       </div>
       <aside>
-        <img src="./static/Tantronics Logo.png" alt="Tantronics Logo" loading="lazy" style="border-radius:16px; border:1px solid #232323; background:#232323; padding:1rem;">
+        <img src="./static/Tantronics Logo.png" alt="Tantronics Logo" loading="lazy" style="border-radius:16px; border:1px solid var(--stroke); background:#232323; padding:1rem;">
         <div class="form-note" style="margin-top:.75rem"></div>
       </aside>
     </div>
   </section>
+
   <!-- Products -->
   <section class="products" id="products">
     <div class="container">
@@ -99,17 +207,17 @@
       <div class="product-grid">
         <!-- Card 1 -->
         <article class="card">
-          <div class="wlc-carousel" style="position:relative; width:100%; aspect-ratio:4/3; overflow:hidden;">
-            <img src="./static/wi1.jpg" alt="Water Level Controller 1" class="wlc-img" style="width:100%; height:100%; object-fit:cover; display:block;">
-            <img src="./static/wi2.jpg" alt="Water Level Controller 2" class="wlc-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
-            <img src="./static/wi3.jpg" alt="Water Level Controller 3" class="wlc-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
-            <img src="./static/wi4.jpg" alt="Water Level Controller 4" class="wlc-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
-            <button class="wlc-prev" style="position:absolute; top:50%; left:10px; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">&#8592;</button>
-            <button class="wlc-next" style="position:absolute; top:50%; right:10px; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">&#8594;</button>
+          <div class="carousel ratio-4x3" data-group="wlc">
+            <img src="./static/wi1.jpg" alt="Water Level Controller 1" class="active">
+            <img src="./static/wi2.jpg" alt="Water Level Controller 2">
+            <img src="./static/wi3.jpg" alt="Water Level Controller 3">
+            <img src="./static/wi4.jpg" alt="Water Level Controller 4">
+            <button class="prev" aria-label="Previous">&#8592;</button>
+            <button class="next" aria-label="Next">&#8594;</button>
           </div>
           <div class="p">
             <span class="pill">Controller</span>
-            <h3>Automatic Water Level Controller in Collabration with WATCO Industries</h3>
+            <h3>Automatic Water Level Controller in Collaboration with WATCO Industries</h3>
             <p>Auto start/stop for pumps, dry‑run protection, and manual override. Supports overhead/underground tanks.</p>
             <ul style="margin:0 0 0 1em; padding:0; color:inherit;">
               <li>LDS</li>
@@ -124,45 +232,47 @@
             </div>
           </div>
         </article>
+
         <!-- Card 2 -->
         <article class="card">
-          <img src="./static/solar panel cleaner robot.jpg" alt="Solar Panel Cleaning Robot" loading="lazy" style="aspect-ratio:4/3; width:100%; height:auto; object-fit:cover;">
+          <img src="./static/solar panel cleaner robot.jpg" alt="Solar Panel Cleaning Robot" loading="lazy">
           <div class="p">
             <span class="pill">Robotics</span>
             <h3>Solar Panel Cleaning Robot</h3>
             <p>A wirelessly operated solar panel cleaning robot is an autonomous system that uses remote control or IoT connectivity to efficiently clean dust and debris from solar panels, ensuring maximum energy output without manual intervention.</p>
             <div class="features">
-              <span>2.4 GHz Wi-Fi/ Bluetooth LE 5.0.</span>
-              <span>Emergency Stop (E-Stop) with NC contact</span>
+              <span>2.4 GHz Wi‑Fi/ Bluetooth LE 5.0.</span>
+              <span>Emergency Stop (E‑Stop) with NC contact</span>
             </div>
           </div>
         </article>
+
         <!-- Card 3 -->
         <article class="card">
           <img src="./static/Digital-Timer.jpg" alt="Light dependent switch module" loading="lazy">
           <div class="p">
             <span class="pill">Industrial Control Equipment</span>
-            <h3>Microcontroller Based Programmable Timer </h3>
+            <h3>Microcontroller Based Programmable Timer</h3>
             <p>A microcontroller-based programmable timer is an electronic device that uses a microcontroller to schedule and control switching operations of connected loads with user-defined ON/OFF times, ensuring precision and automation.</p>
             <div class="features">
-              <span>12–24V</span><br>
-              <span>RTC (Real Time Clock) with battery backup</span>
+              <span>12–24V</span>
+              <span>RTC with backup</span>
               <span>EEPROM/Flash storage</span>
             </div>
           </div>
         </article>
+
         <!-- Card 4 -->
         <article class="card">
-          <div class="auto-carousel" style="position:relative; width:100%; aspect-ratio:4/3; overflow:hidden;">
-            <img src="./static/pt1.1.JPG" alt="Automobile Alert Unit 1" class="auto-img" style="width:100%; height:100%; object-fit:cover; display:block;">
-            <img src="./static/pt1.JPG" alt="Automobile Alert Unit 2" class="auto-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
-            <button class="auto-prev" style="position:absolute; top:50%; left:10px; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">&#8592;</button>
-            <button class="auto-next" style="position:absolute; top:50%; right:10px; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">&#8594;</button>
+          <div class="carousel ratio-4x3" data-group="auto">
+            <img src="./static/pt1.1.JPG" alt="Automobile Alert Unit 1" class="active">
+            <img src="./static/pt1.JPG" alt="Automobile Alert Unit 2">
+            <button class="prev" aria-label="Previous">&#8592;</button>
+            <button class="next" aria-label="Next">&#8594;</button>
           </div>
           <div class="p">
             <span class="pill">Automobile</span>
-            <h3> AN INDICATION ALERT UNIT SYSTEM FOR AUTOMOBILE DRIVING 
-LIGHTS</h3>
+            <h3>AN INDICATION ALERT UNIT SYSTEM FOR AUTOMOBILE DRIVING LIGHTS</h3>
             <p>Unit System for Automobile Driving Lights is an innovative patented solution designed to monitor, detect, and alert drivers of High Beam vehicle lighting, ensuring enhanced road safety and compliance.</p>
             <div class="features">
               <span>12V/24V DC</span>
@@ -171,14 +281,15 @@ LIGHTS</h3>
             </div>
           </div>
         </article>
+
         <!-- Card 5 -->
         <article class="card">
-          <div class="smps-carousel" style="position:relative; width:100%; aspect-ratio:4/3; overflow:hidden;">
-            <img src="./static/ps.jpg" alt="Industrial SMPS power supply 1" class="smps-img" style="width:100%; height:100%; object-fit:cover; display:block;">
-            <img src="./static/ps1.jpg" alt="Industrial SMPS power supply 2" class="smps-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
-            <img src="./static/ps2.jpg" alt="Industrial SMPS power supply 3" class="smps-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
-            <button class="smps-prev" style="position:absolute; top:50%; left:10px; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">&#8592;</button>
-            <button class="smps-next" style="position:absolute; top:50%; right:10px; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">&#8594;</button>
+          <div class="carousel ratio-4x3" data-group="smps">
+            <img src="./static/ps.jpg" alt="Industrial SMPS power supply 1" class="active">
+            <img src="./static/ps1.jpg" alt="Industrial SMPS power supply 2">
+            <img src="./static/ps2.jpg" alt="Industrial SMPS power supply 3">
+            <button class="prev" aria-label="Previous">&#8592;</button>
+            <button class="next" aria-label="Next">&#8594;</button>
           </div>
           <div class="p">
             <span class="pill">Power</span>
@@ -191,6 +302,7 @@ LIGHTS</h3>
             </div>
           </div>
         </article>
+
         <!-- Card 6 -->
         <article class="card">
           <img src="./static/ozone.jpg" alt="Custom PCB and enclosure mockup" loading="lazy">
@@ -208,6 +320,7 @@ LIGHTS</h3>
       </div>
     </div>
   </section>
+
   <!-- CTA Banner -->
   <section class="cta" id="enquiry" aria-label="Enquiry">
     <div class="container">
@@ -220,6 +333,7 @@ LIGHTS</h3>
       </div>
     </div>
   </section>
+
   <!-- Contact -->
   <section class="contact" id="contact">
     <div class="container">
@@ -261,8 +375,7 @@ LIGHTS</h3>
           </div>
           <div class="full" style="display:flex; align-items:center;">
             <label class="form-note" style="display:flex; align-items:center; font-weight:400; white-space:nowrap; margin-left:0;">
-              <input type="checkbox" id="consent" required style="margin-right:4px;">
-              I agree to be contacted about my enquiry.
+              <input type="checkbox" id="consent" required style="margin-right:4px;"> I agree to be contacted about my enquiry.
             </label>
           </div>
           <div class="full">
@@ -278,8 +391,7 @@ LIGHTS</h3>
               Founder & Director / Electronics Engineer<br>
               <a href="tel:+917820912136"><i class="fa-solid fa-phone"></i> +91 7820912136</a><br>
               <a href="mailto:tantronicsindustries@gmail.com"><i class="fa-solid fa-envelope"></i> tantronicsindustries@gmail.com</a><br>
-              Warje, Pune, Maharashtra 411058<br>
-              <br>
+              Warje, Pune, Maharashtra 411058<br><br>
               <strong>Opening Hours:</strong> 10:00AM - 6:00PM
             </p>
             <div style="aspect-ratio: 4/3; overflow:hidden; border-radius:12px; border:1px solid #e2e8f0; margin-top:1rem;">
@@ -291,6 +403,7 @@ LIGHTS</h3>
       </div>
     </div>
   </section>
+
   <!-- Footer -->
   <footer>
     <div class="foot">
@@ -318,20 +431,20 @@ LIGHTS</h3>
       <div style="margin-top:.25rem; font-size:.85rem">Designed & Developed by <a href="#">Tantronics Industries LLP</a></div>
     </div>
   </footer>
+
   <script>
-    // Mobile menu toggle
+    // Mobile menu toggle (menu is full-width %)
     const burger = document.querySelector('.hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     burger?.addEventListener('click', () => {
-      const open = mobileMenu.style.display === 'block';
-      mobileMenu.style.display = open ? 'none' : 'block';
+      const isOpen = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = isOpen ? 'none' : 'block';
     });
-    // Close mobile menu on link click
-    mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{
-      mobileMenu.style.display = 'none';
-    }));
+    mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{ mobileMenu.style.display = 'none'; }));
+
     // Year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
+
     // Basic form validation + submission UX
     const form = document.getElementById('contactForm');
     const statusEl = document.getElementById('formStatus');
@@ -345,63 +458,19 @@ LIGHTS</h3>
       statusEl.textContent = 'Thanks! Your enquiry has been sent.';
       form.reset();
     });
-    // SMPS image carousel
-    const smpsImgs = document.querySelectorAll('.smps-carousel .smps-img');
-    const smpsPrev = document.querySelector('.smps-prev');
-    const smpsNext = document.querySelector('.smps-next');
-    let smpsIndex = 0;
-    function showSmpsImg(idx) {
-      smpsImgs.forEach((img, i) => {
-        img.style.display = i === idx ? 'block' : 'none';
-      });
+
+    // Generic % carousel (works for all groups)
+    function initCarousel(root){
+      const imgs = Array.from(root.querySelectorAll('img'));
+      const prev = root.querySelector('.prev');
+      const next = root.querySelector('.next');
+      let idx = 0;
+      function show(i){ imgs.forEach((im,n)=> im.classList.toggle('active', n===i)); }
+      prev?.addEventListener('click', ()=>{ idx = (idx - 1 + imgs.length) % imgs.length; show(idx); });
+      next?.addEventListener('click', ()=>{ idx = (idx + 1) % imgs.length; show(idx); });
+      show(idx);
     }
-    smpsPrev?.addEventListener('click', () => {
-      smpsIndex = (smpsIndex - 1 + smpsImgs.length) % smpsImgs.length;
-      showSmpsImg(smpsIndex);
-    });
-    smpsNext?.addEventListener('click', () => {
-      smpsIndex = (smpsIndex + 1) % smpsImgs.length;
-      showSmpsImg(smpsIndex);
-    });
-    showSmpsImg(smpsIndex);
-    // Water Level Controller image carousel
-    const wlcImgs = document.querySelectorAll('.wlc-carousel .wlc-img');
-    const wlcPrev = document.querySelector('.wlc-prev');
-    const wlcNext = document.querySelector('.wlc-next');
-    let wlcIndex = 0;
-    function showWlcImg(idx) {
-      wlcImgs.forEach((img, i) => {
-        img.style.display = i === idx ? 'block' : 'none';
-      });
-    }
-    wlcPrev?.addEventListener('click', () => {
-      wlcIndex = (wlcIndex - 1 + wlcImgs.length) % wlcImgs.length;
-      showWlcImg(wlcIndex);
-    });
-    wlcNext?.addEventListener('click', () => {
-      wlcIndex = (wlcIndex + 1) % wlcImgs.length;
-      showWlcImg(wlcIndex);
-    });
-    showWlcImg(wlcIndex);
-    // Automobile Alert Unit image carousel
-    const autoImgs = document.querySelectorAll('.auto-carousel .auto-img');
-    const autoPrev = document.querySelector('.auto-prev');
-    const autoNext = document.querySelector('.auto-next');
-    let autoIndex = 0;
-    function showAutoImg(idx) {
-      autoImgs.forEach((img, i) => {
-        img.style.display = i === idx ? 'block' : 'none';
-      });
-    }
-    autoPrev?.addEventListener('click', () => {
-      autoIndex = (autoIndex - 1 + autoImgs.length) % autoImgs.length;
-      showAutoImg(autoIndex);
-    });
-    autoNext?.addEventListener('click', () => {
-      autoIndex = (autoIndex + 1) % autoImgs.length;
-      showAutoImg(autoIndex);
-    });
-    showAutoImg(autoIndex);
+    document.querySelectorAll('.carousel').forEach(initCarousel);
   </script>
 </body>
 </html>
