@@ -34,7 +34,7 @@
 
     /* Hero sizing - height as percentage of viewport */
     .hero { min-height: 70vh; display: flex; align-items: center; justify-content: center; }
-    .hero-inner { width: 80vw; max-width: 1100px; margin: 0 auto; text-align: center; }
+    .hero-inner { width: 80vw; max-width: 100%; margin: 0 auto; text-align: center; }
 
     /* CTA row spacing */
     .cta-row { display: flex; gap: 2vw; justify-content: center; flex-wrap: wrap; }
@@ -105,7 +105,7 @@
     img { max-width: 100%; height: auto; display: block; }
 
     /* Small utility tweaks to preserve flow on very small screens */
-    @media (max-width: 420px) {
+    @media (max-width: 40%) {
       .header-logo { height: 5.5vh; }
       .cta-row { gap: 3vw; flex-direction: column; }
       .panel .lead { max-width: 100%; }
