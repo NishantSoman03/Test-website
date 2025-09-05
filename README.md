@@ -11,15 +11,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="icon" type="image/png" href="../static/Tantronics Logo.png">
-  <link rel="stylesheet" href="../static/style.css">
+  <link rel="icon" type="image/png" href="./static/Tantronics Logo.png">
+  <link rel="stylesheet" href="./static/style.css">
 </head>
 <body>
   <!-- Header -->
   <header>
     <div class="nav">
       <a class="brand" href="#home" aria-label="Tantronics home">
-        <img src="../static/Tantronics Logo.png" alt="Tantronics Logo" class="header-logo" loading="lazy">
+        <img src="./static/Tantronics Logo.png" alt="Tantronics Logo" class="header-logo" loading="lazy">
         <span>Tantronics Industries LLP</span>
       </a>
       <nav aria-label="Primary">
@@ -85,7 +85,7 @@
         </div>
       </div>
       <aside>
-        <img src="../static/Tantronics Logo.png" alt="Tantronics Logo" loading="lazy" style="border-radius:16px; border:1px solid #232323; background:#232323; padding:1rem;">
+        <img src="./static/Tantronics Logo.png" alt="Tantronics Logo" loading="lazy" style="border-radius:16px; border:1px solid #232323; background:#232323; padding:1rem;">
         <div class="form-note" style="margin-top:.75rem"></div>
       </aside>
     </div>
@@ -100,10 +100,10 @@
         <!-- Card 1 -->
         <article class="card">
           <div class="wlc-carousel" style="position:relative; width:100%; aspect-ratio:4/3; overflow:hidden;">
-            <img src="../static/wi1.jpg" alt="Water Level Controller 1" class="wlc-img" style="width:100%; height:100%; object-fit:cover; display:block;">
-            <img src="../static/wi2.jpg" alt="Water Level Controller 2" class="wlc-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
-            <img src="../static/wi3.jpg" alt="Water Level Controller 3" class="wlc-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
-            <img src="../static/wi4.jpg" alt="Water Level Controller 4" class="wlc-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
+            <img src="./static/wi1.jpg" alt="Water Level Controller 1" class="wlc-img" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <img src="./static/wi2.jpg" alt="Water Level Controller 2" class="wlc-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
+            <img src="./static/wi3.jpg" alt="Water Level Controller 3" class="wlc-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
+            <img src="./static/wi4.jpg" alt="Water Level Controller 4" class="wlc-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
             <button class="wlc-prev" style="position:absolute; top:50%; left:10px; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">&#8592;</button>
             <button class="wlc-next" style="position:absolute; top:50%; right:10px; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">&#8594;</button>
           </div>
@@ -126,7 +126,7 @@
         </article>
         <!-- Card 2 -->
         <article class="card">
-          <img src="../static/solar panel cleaner robot.jpg" alt="Solar Panel Cleaning Robot" loading="lazy" style="aspect-ratio:4/3; width:100%; height:auto; object-fit:cover;">
+          <img src="./static/solar panel cleaner robot.jpg" alt="Solar Panel Cleaning Robot" loading="lazy" style="aspect-ratio:4/3; width:100%; height:auto; object-fit:cover;">
           <div class="p">
             <span class="pill">Robotics</span>
             <h3>Solar Panel Cleaning Robot</h3>
@@ -139,7 +139,7 @@
         </article>
         <!-- Card 3 -->
         <article class="card">
-          <img src="../static/Digital-Timer.jpg" alt="Light dependent switch module" loading="lazy">
+          <img src="./static/Digital-Timer.jpg" alt="Light dependent switch module" loading="lazy">
           <div class="p">
             <span class="pill">Industrial Control Equipment</span>
             <h3>Microcontroller Based Programmable Timer </h3>
@@ -154,8 +154,8 @@
         <!-- Card 4 -->
         <article class="card">
           <div class="auto-carousel" style="position:relative; width:100%; aspect-ratio:4/3; overflow:hidden;">
-            <img src="../static/pt1.1.JPG" alt="Automobile Alert Unit 1" class="auto-img" style="width:100%; height:100%; object-fit:cover; display:block;">
-            <img src="../static/pt1.JPG" alt="Automobile Alert Unit 2" class="auto-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
+            <img src="./static/pt1.1.JPG" alt="Automobile Alert Unit 1" class="auto-img" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <img src="./static/pt1.JPG" alt="Automobile Alert Unit 2" class="auto-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
             <button class="auto-prev" style="position:absolute; top:50%; left:10px; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">&#8592;</button>
             <button class="auto-next" style="position:absolute; top:50%; right:10px; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">&#8594;</button>
           </div>
@@ -174,9 +174,9 @@ LIGHTS</h3>
         <!-- Card 5 -->
         <article class="card">
           <div class="smps-carousel" style="position:relative; width:100%; aspect-ratio:4/3; overflow:hidden;">
-            <img src="../static/ps.jpg" alt="Industrial SMPS power supply 1" class="smps-img" style="width:100%; height:100%; object-fit:cover; display:block;">
-            <img src="../static/ps1.jpg" alt="Industrial SMPS power supply 2" class="smps-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
-            <img src="../static/ps2.jpg" alt="Industrial SMPS power supply 3" class="smps-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
+            <img src="./static/ps.jpg" alt="Industrial SMPS power supply 1" class="smps-img" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <img src="./static/ps1.jpg" alt="Industrial SMPS power supply 2" class="smps-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
+            <img src="./static/ps2.jpg" alt="Industrial SMPS power supply 3" class="smps-img" style="width:100%; height:100%; object-fit:cover; display:none; position:absolute; top:0; left:0;">
             <button class="smps-prev" style="position:absolute; top:50%; left:10px; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">&#8592;</button>
             <button class="smps-next" style="position:absolute; top:50%; right:10px; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">&#8594;</button>
           </div>
@@ -193,7 +193,7 @@ LIGHTS</h3>
         </article>
         <!-- Card 6 -->
         <article class="card">
-          <img src="../static/ozone.jpg" alt="Custom PCB and enclosure mockup" loading="lazy">
+          <img src="./static/ozone.jpg" alt="Custom PCB and enclosure mockup" loading="lazy">
           <div class="p">
             <span class="pill">OEM</span>
             <h3>Custom OEM Development</h3>
